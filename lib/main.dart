@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/modules/on_boarding/on_boarding_screen.dart';
 import 'package:shop_app/shared/bloc_provider.dart';
 import 'package:shop_app/shared/network/local/cach_helper.dart';
+import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await CachHelper.init();
+  DioHelper.init();
   runApp(MyApp());
 }
 

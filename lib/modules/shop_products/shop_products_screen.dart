@@ -52,6 +52,14 @@ Widget ProductBuilderItem(HomeModel? model, CategoriesModel? category) =>
               )
           ),
           SizedBox(height: 10.0,),
+          Text(
+            'Categories',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          SizedBox(height: 10.0,),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
@@ -63,6 +71,14 @@ Widget ProductBuilderItem(HomeModel? model, CategoriesModel? category) =>
                 separatorBuilder: (context, index) => SizedBox(width: 10.0,),
                 itemCount: category!.catDataModel.catDataList.length,
               ),
+            ),
+          ),
+          SizedBox(height: 10.0,),
+          Text(
+            'New Products',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
             ),
           ),
           SizedBox(height: 10.0,),

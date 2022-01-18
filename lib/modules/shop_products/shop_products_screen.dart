@@ -52,33 +52,40 @@ Widget ProductBuilderItem(HomeModel? model, CategoriesModel? category) =>
               )
           ),
           SizedBox(height: 10.0,),
-          Text(
-            'Categories',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          SizedBox(height: 10.0,),
           Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              height: 80,
-              child: ListView.separated(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => buildCategoryItem(category!.catDataModel.catDataList[index]),
-                separatorBuilder: (context, index) => SizedBox(width: 10.0,),
-                itemCount: category!.catDataModel.catDataList.length,
-              ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
             ),
-          ),
-          SizedBox(height: 10.0,),
-          Text(
-            'New Products',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Categories',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                SizedBox(height: 10.0,),
+                Container(
+                  height: 100,
+                  child: ListView.separated(
+                    physics: BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => buildCategoryItem(category!.catDataModel.catDataList[index]),
+                    separatorBuilder: (context, index) => SizedBox(width: 10.0,),
+                    itemCount: category!.catDataModel.catDataList.length,
+                  ),
+                ),
+                SizedBox(height: 20.0,),
+                Text(
+                  'New Products',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height: 10.0,),
@@ -109,11 +116,11 @@ Widget buildCategoryItem(CategoryData category){
     children: [
       Image(
         image: NetworkImage(category.image),
-        height: 80,
-        width: 80,
+        height: 100,
+        width: 100,
       ),
       Container(
-        width: 80,
+        width: 100,
         color: Colors.black.withOpacity(0.7),
         child: Text(
           category.name,

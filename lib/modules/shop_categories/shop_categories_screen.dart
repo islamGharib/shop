@@ -37,3 +37,26 @@ Widget CategoryBuilderItem(CategoriesModel? category){
     ),
   );
 }
+
+Widget buildCategoryItem(CategoryData category){
+  return Row(
+    children: [
+      Image(
+        image: NetworkImage(category.image),
+        height: 120,
+        width: 120,
+        fit: BoxFit.cover,
+      ),
+      SizedBox(width: 20,),
+      Text(
+        category.name,
+        style: TextStyle(
+            color: Colors.black,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w600
+        ),
+      ),
+
+    ],
+  );
+}

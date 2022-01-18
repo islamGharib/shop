@@ -26,37 +26,42 @@ class ShopCategoriesScreen extends StatelessWidget {
 }
 
 Widget CategoryBuilderItem(CategoriesModel? category){
-  return Padding(
-    padding: const EdgeInsets.all(20.0),
-    child: ListView.separated(
-      physics: BouncingScrollPhysics(),
-      //scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) => buildCategoryItem(category!.catDataModel.catDataList[index]),
-      separatorBuilder: (context, index) => myDivider(),
-      itemCount: category!.catDataModel.catDataList.length,
-    ),
+  return ListView.separated(
+    physics: BouncingScrollPhysics(),
+    //scrollDirection: Axis.horizontal,
+    itemBuilder: (context, index) => buildCategoryItem(category!.catDataModel.catDataList[index]),
+    separatorBuilder: (context, index) => myDivider(),
+    itemCount: category!.catDataModel.catDataList.length,
   );
 }
 
 Widget buildCategoryItem(CategoryData category){
-  return Row(
-    children: [
-      Image(
-        image: NetworkImage(category.image),
-        height: 120,
-        width: 120,
-        fit: BoxFit.cover,
-      ),
-      SizedBox(width: 20,),
-      Text(
-        category.name,
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 20.0,
-            fontWeight: FontWeight.w600
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Row(
+      children: [
+        Image(
+          image: NetworkImage(category.image),
+          height: 80,
+          width: 80,
+          fit: BoxFit.cover,
         ),
-      ),
+        SizedBox(width: 20,),
+        Text(
+          category.name,
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w600
+          ),
+        ),
 
-    ],
+        Spacer(),
+        Icon(
+          Icons.arrow_forward_ios,
+        ),
+
+      ],
+    ),
   );
 }

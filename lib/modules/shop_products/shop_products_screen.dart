@@ -18,7 +18,7 @@ class ShopProductsScreen extends StatelessWidget {
         ShopCubit shopCubit = ShopCubit.get(context);
         return ConditionalBuilder(
           condition: shopCubit.homeModel != null && shopCubit.categoriesModel != null,
-          builder: (context) => ProductBuilderItem(shopCubit.homeModel, shopCubit.categoriesModel),
+          builder: (context) => ProductBuilderItem(shopCubit.homeModel, shopCubit.categoriesModel, context),
           fallback: (context) => Center(child: CircularProgressIndicator(),),
         );
       },
@@ -27,7 +27,7 @@ class ShopProductsScreen extends StatelessWidget {
   }
 }
 
-Widget ProductBuilderItem(HomeModel? model, CategoriesModel? category) =>
+Widget ProductBuilderItem(HomeModel? model, CategoriesModel? category, context) =>
     SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -100,7 +100,7 @@ Widget ProductBuilderItem(HomeModel? model, CategoriesModel? category) =>
               childAspectRatio: 1 / 1.51,
               children: List.generate(
                   model.data.products.length,
-                      (index) => buildGridProduct(model.data.products[index])
+                      (index) => buildGridProduct(model.data.products[index], context)
               ),
             ),
           ),
@@ -137,7 +137,7 @@ Widget buildCategoryItem(CategoryData category){
 }
 
           // Grid product
-Widget buildGridProduct(ProductModel model){
+Widget buildGridProduct(ProductModel model, context){
   return Container(
     color: Colors.white,
     child: Column(
@@ -202,9 +202,13 @@ Widget buildGridProduct(ProductModel model){
                   IconButton(
                     onPressed: (){},
                     padding: EdgeInsets.zero,
-                    icon: Icon(
-                      Icons.favorite_border,
-                      size: 14.0,
+                    icon: CircleAvatar(
+                      radius: 15.0,
+                      backgroundColor: (ShopCubit.get(context).favorites[model.id])!? defaultColor: Colors.grey,
+                      child: Icon(
+                        Icons.favorite_border,
+                        size: 14.0,
+                      ),
                     ),
                   ),
                 ],

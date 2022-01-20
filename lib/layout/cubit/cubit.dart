@@ -56,6 +56,7 @@ class ShopCubit extends Cubit<ShopStates>{
   }
 
   HomeModel? homeModel;
+  Map<int, bool> favorites = {};
   void getHomeData(){
     emit(ShopHomeDataLoadingState());
     DioHelper.getData(
@@ -64,6 +65,12 @@ class ShopCubit extends Cubit<ShopStates>{
     ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
       print(homeModel!.data.products[0].image);
+      homeModel!.data.products.forEach((element) {
+        favorites.addAll({
+          element.id:element.inFavorite
+        });
+      });
+      //print(favorites.toString());
       emit(ShopHomeDataSuccessState());
     }).catchError((error){
       print(error.toString());

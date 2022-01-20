@@ -7,13 +7,23 @@ import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/models/category_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/shared/component/components.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 class ShopProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopCubit, ShopStates>(
-      listener: (context, state){},
+      listener: (context, state){
+        if(state is ShopSuccessChangeFavoritesStates){
+          if(!state.model.status){
+            showFlutterToast(
+                message: state.model.message,
+                state: ToastStates.ERROR,
+            );
+          }
+        }
+      },
       builder: (context, state){
         ShopCubit shopCubit = ShopCubit.get(context);
         return ConditionalBuilder(
@@ -200,7 +210,9 @@ Widget buildGridProduct(ProductModel model, context){
                     ),
                   Spacer(),
                   IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      ShopCubit.get(context).changeFavorites(model.id);
+                    },
                     padding: EdgeInsets.zero,
                     icon: CircleAvatar(
                       radius: 15.0,

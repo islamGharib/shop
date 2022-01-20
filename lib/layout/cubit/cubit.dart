@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/models/category_model.dart';
+import 'package:shop_app/models/change_favorites_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/modules/shop_categories/shop_categories_screen.dart';
 import 'package:shop_app/modules/shop_favorites/shop_favorites_screen.dart';
@@ -56,6 +57,7 @@ class ShopCubit extends Cubit<ShopStates>{
   }
 
   HomeModel? homeModel;
+  Map<int, bool> favorites = {};
   void getHomeData(){
     emit(ShopHomeDataLoadingState());
     DioHelper.getData(
@@ -64,6 +66,12 @@ class ShopCubit extends Cubit<ShopStates>{
     ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
       print(homeModel!.data.products[0].image);
+      homeModel!.data.products.forEach((element) {
+        favorites.addAll({
+          element.id:element.inFavorite
+        });
+      });
+      //print(favorites.toString());
       emit(ShopHomeDataSuccessState());
     }).catchError((error){
       print(error.toString());
@@ -84,6 +92,28 @@ class ShopCubit extends Cubit<ShopStates>{
     }).catchError((error){
       print(error.toString());
       emit(ShopCategoriesDataErrorState());
+    });
+  }
+
+  ChangeFavoritesModel? changeFavoritesModel;
+  void changeFavorites(int productId){
+    favorites[productId] = !(favorites[productId]!);
+    emit(ShopChangeFavoritesState());
+
+    DioHelper.postData(
+        url: FAVORITE,
+        data: {'product_id' : productId},
+        token: token,
+    ).then((value) {
+      changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
+      print(value.data);
+      if(!(changeFavoritesModel!.status)){
+        favorites[productId] = !(favorites[productId]!);
+      }
+      emit(ShopSuccessChangeFavoritesStates(changeFavoritesModel!));
+    }).catchError((error){
+      print(error.toString());
+      emit(ShopErrorChangeFavoritesStates());
     });
   }
 

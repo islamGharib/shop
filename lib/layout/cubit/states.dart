@@ -14,3 +14,5 @@ class ShopSuccessChangeFavoritesStates extends ShopStates{
   ShopSuccessChangeFavoritesStates(this.model);
 }
 class ShopErrorChangeFavoritesStates extends ShopStates{}
+class ShopFavoritesDataSuccessState extends ShopStates{}
+class ShopFavoritesDataErrorState extends ShopStates{}

@@ -107,8 +107,7 @@ Widget FavoriteItem(FavoriteProductModel favorite, context){
                       padding: EdgeInsets.zero,
                       icon: CircleAvatar(
                         radius: 15.0,
-                        //backgroundColor: (ShopCubit.get(context).favorites[model.id])!? defaultColor: Colors.grey,
-                        backgroundColor: Colors.grey,
+                        backgroundColor: (ShopCubit.get(context).favorites[favorite.id])!? defaultColor: Colors.grey,
                         child: Icon(
                           Icons.favorite_border,
                           size: 14.0,

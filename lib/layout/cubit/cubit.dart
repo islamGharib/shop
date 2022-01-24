@@ -110,6 +110,8 @@ class ShopCubit extends Cubit<ShopStates>{
       print(value.data);
       if(!(changeFavoritesModel!.status)){
         favorites[productId] = !(favorites[productId]!);
+      }else{
+        getFavoritesData();
       }
       emit(ShopSuccessChangeFavoritesStates(changeFavoritesModel!));
     }).catchError((error){

@@ -30,17 +30,28 @@ class FavoriteDataModel{
 
 class FavoriteData{
   int id;
+  FavoriteProductModel favProductModel;
+
+  FavoriteData.fromJson(Map<String,dynamic> json)
+      : id = json['id'],
+        favProductModel = FavoriteProductModel.fromJson(json['product']);
+}
+
+class FavoriteProductModel{
+  int id;
   String name;
   String image;
   dynamic price;
   dynamic oldPrice;
   dynamic discount;
 
-  FavoriteData.fromJson(Map<String,dynamic> json)
+  FavoriteProductModel.fromJson(Map<String,dynamic> json)
       : id = json['id'],
         name = json['name'],
         image = json['image'],
         price = json['price'],
         oldPrice = json['old_price'],
         discount = json['discount'];
+
+
 }

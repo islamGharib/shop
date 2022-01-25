@@ -1,6 +1,6 @@
 class ShopLoginModel{
   bool status;
-  String message;
+  String? message;
   UserData? data;
             // named constructor
   ShopLoginModel.fromJson(Map<String, dynamic> json)

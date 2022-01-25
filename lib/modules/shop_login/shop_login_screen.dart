@@ -33,7 +33,7 @@ class ShopLoginScreen extends StatelessWidget {
             }else{
               print(state.loginModel.message);
               showFlutterToast(
-                message: state.loginModel.message,
+                message: state.loginModel.message!,
                 state: ToastStates.ERROR,
               );
             }

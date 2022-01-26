@@ -167,7 +167,7 @@ class ShopCubit extends Cubit<ShopStates>{
       data: {
         'name':name,
         'email':email,
-        'phone':phone
+        'phone':phone,
       },
       token: token,
     ).then((value) async {

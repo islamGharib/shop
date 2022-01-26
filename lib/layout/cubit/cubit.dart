@@ -163,7 +163,7 @@ class ShopCubit extends Cubit<ShopStates>{
   {
     emit(ShopUpdateUserDataLoadingState());
     DioHelper.putData(
-      url: PROFILE,
+      url: UPDATE_PROFILE,
       data: {
         'name':name,
         'email':email,

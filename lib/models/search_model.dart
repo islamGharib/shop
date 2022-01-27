@@ -1,8 +1,8 @@
-class SerachModel{
+class SearchModel{
   bool status ;
   String? message;
   Data data;
-  SerachModel.fromJson(Map<String, dynamic> json)
+  SearchModel.fromJson(Map<String, dynamic> json)
       : status = json['status'],
         message = json['message'],
         data = json['data'] = Data.fromJson(json['data']);

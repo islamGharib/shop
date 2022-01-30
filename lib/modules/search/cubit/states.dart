@@ -4,7 +4,7 @@ abstract class SearchStates{}
 class SearchProductDataInitialState extends SearchStates{}
 class SearchProductDataLoadingState extends SearchStates{}
 class SearchProductDataSuccessState extends SearchStates{
-  final SearchModel model;
-  SearchProductDataSuccessState(this.model);
+  // final SearchModel model;
+  // SearchProductDataSuccessState(this.model);
 }
 class SearchProductDataErrorState extends SearchStates{}

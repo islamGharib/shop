@@ -21,7 +21,7 @@ class SearchCubit extends Cubit<SearchStates>{
     ).then((value) {
       searchResult = SearchModel.fromJson(value.data);
       print(searchResult!.data.productDataList[0].name);
-      emit(SearchProductDataSuccessState(searchResult!));
+      emit(SearchProductDataSuccessState());
     }).catchError((error){
       print(error.toString());
       emit(SearchProductDataErrorState());

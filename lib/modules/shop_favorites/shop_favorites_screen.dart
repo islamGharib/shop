@@ -6,7 +6,6 @@ import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/models/favorites_model.dart';
 import 'package:shop_app/shared/component/components.dart';
-import 'package:shop_app/shared/styles/colors.dart';
 
 class ShopFavoritesScreen extends StatelessWidget {
   @override

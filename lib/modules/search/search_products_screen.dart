@@ -1,12 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/layout/cubit/cubit.dart';
-import 'package:shop_app/models/favorites_model.dart';
-import 'package:shop_app/models/search_model.dart';
 import 'package:shop_app/modules/search/cubit/cubit.dart';
 import 'package:shop_app/shared/component/components.dart';
-import 'package:shop_app/shared/styles/colors.dart';
 
 import 'cubit/states.dart';
 

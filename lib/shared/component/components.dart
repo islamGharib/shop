@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/models/favorites_model.dart';
+import 'package:shop_app/modules/search/cubit/cubit.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 void navigateTo(context, widget) => Navigator.push(
   context,
@@ -123,7 +124,7 @@ Color chooseToastColor(ToastStates state){
   return color;
 }
 
-Widget ProductItem(model, context, {isSearched = false}){
+Widget ProductItem(model, context, {isSearched = false, searchedText = ''}){
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Container(
@@ -192,6 +193,11 @@ Widget ProductItem(model, context, {isSearched = false}){
                     Spacer(),
                     IconButton(
                       onPressed: (){
+                        if(isSearched){
+                          ShopCubit.get(context).changeFavorites(model.id);
+                          SearchCubit.get(context).getSearchResult(searchedText);
+                        }
+                        else
                         ShopCubit.get(context).changeFavorites(model.id);
                       },
                       padding: EdgeInsets.zero,

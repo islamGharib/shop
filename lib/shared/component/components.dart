@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/layout/cubit/cubit.dart';
+import 'package:shop_app/models/favorites_model.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 void navigateTo(context, widget) => Navigator.push(
   context,
@@ -121,3 +123,93 @@ Color chooseToastColor(ToastStates state){
   return color;
 }
 
+Widget ProductItem(FavoriteProductModel favorite, context, {isSearched = false}){
+  return Padding(
+    padding: const EdgeInsets.all(20.0),
+    child: Container(
+      height: 120,
+      child: Row(
+        children: [
+          Stack(
+            alignment: AlignmentDirectional.bottomStart,
+            children: [
+              Image(
+                image: NetworkImage(favorite.image),
+                fit: BoxFit.cover,
+                width: 120,
+                height: 120,
+              ),
+              if(favorite.discount != 0 && isSearched == false)
+                Container(
+                  color: Colors.red,
+                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Text(
+                    'DISCOUNT',
+                    style: TextStyle(
+                        fontSize: 8.0,
+                        color: Colors.white
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          SizedBox(width: 20,),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  favorite.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    height: 1.3,
+                  ),
+                ),
+                Spacer(),
+                Row(
+                  children: [
+                    Text(
+                      '${favorite.price.round()}',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        color: defaultColor,
+                      ),
+                    ),
+                    SizedBox(width: 5.0,),
+                    if(favorite.discount != 0 && isSearched == false)
+                      Text(
+                        '${favorite.oldPrice.round()}',
+                        style: TextStyle(
+                            fontSize: 10.0,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough
+                        ),
+                      ),
+                    Spacer(),
+                    IconButton(
+                      onPressed: (){
+                        ShopCubit.get(context).changeFavorites(favorite.id);
+                      },
+                      padding: EdgeInsets.zero,
+                      icon: CircleAvatar(
+                        radius: 15.0,
+                        backgroundColor: (ShopCubit.get(context).favorites[favorite.id])!? defaultColor: Colors.grey,
+                        child: Icon(
+                          Icons.favorite_border,
+                          size: 14.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+
+        ],
+      ),
+    ),
+  );
+}

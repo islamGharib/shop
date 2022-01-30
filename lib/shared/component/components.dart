@@ -123,7 +123,7 @@ Color chooseToastColor(ToastStates state){
   return color;
 }
 
-Widget ProductItem(FavoriteProductModel favorite, context, {isSearched = false}){
+Widget ProductItem(model, context, {isSearched = false}){
   return Padding(
     padding: const EdgeInsets.all(20.0),
     child: Container(
@@ -134,12 +134,12 @@ Widget ProductItem(FavoriteProductModel favorite, context, {isSearched = false})
             alignment: AlignmentDirectional.bottomStart,
             children: [
               Image(
-                image: NetworkImage(favorite.image),
+                image: NetworkImage(model.image),
                 fit: BoxFit.cover,
                 width: 120,
                 height: 120,
               ),
-              if(favorite.discount != 0 && isSearched == false)
+              if(model.discount != 0 && isSearched == false)
                 Container(
                   color: Colors.red,
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -159,7 +159,7 @@ Widget ProductItem(FavoriteProductModel favorite, context, {isSearched = false})
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  favorite.name,
+                  model.name,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -171,16 +171,16 @@ Widget ProductItem(FavoriteProductModel favorite, context, {isSearched = false})
                 Row(
                   children: [
                     Text(
-                      '${favorite.price.round()}',
+                      '${model.price.round()}',
                       style: TextStyle(
                         fontSize: 12.0,
                         color: defaultColor,
                       ),
                     ),
                     SizedBox(width: 5.0,),
-                    if(favorite.discount != 0 && isSearched == false)
+                    if(model.discount != 0 && isSearched == false)
                       Text(
-                        '${favorite.oldPrice.round()}',
+                        '${model.oldPrice.round()}',
                         style: TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey,
@@ -190,12 +190,12 @@ Widget ProductItem(FavoriteProductModel favorite, context, {isSearched = false})
                     Spacer(),
                     IconButton(
                       onPressed: (){
-                        ShopCubit.get(context).changeFavorites(favorite.id);
+                        ShopCubit.get(context).changeFavorites(model.id);
                       },
                       padding: EdgeInsets.zero,
                       icon: CircleAvatar(
                         radius: 15.0,
-                        backgroundColor: (ShopCubit.get(context).favorites[favorite.id])!? defaultColor: Colors.grey,
+                        backgroundColor: (ShopCubit.get(context).favorites[model.id])!? defaultColor: Colors.grey,
                         child: Icon(
                           Icons.favorite_border,
                           size: 14.0,

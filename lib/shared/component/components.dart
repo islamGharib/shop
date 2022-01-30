@@ -139,7 +139,8 @@ Widget ProductItem(model, context, {isSearched = false}){
                 width: 120,
                 height: 120,
               ),
-              if(model.discount != 0 && isSearched == false)
+              if(isSearched == false)
+                if (model.discount != 0)
                 Container(
                   color: Colors.red,
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -178,7 +179,8 @@ Widget ProductItem(model, context, {isSearched = false}){
                       ),
                     ),
                     SizedBox(width: 5.0,),
-                    if(model.discount != 0 && isSearched == false)
+                    if(isSearched == false)
+                      if (model.discount != 0)
                       Text(
                         '${model.oldPrice.round()}',
                         style: TextStyle(

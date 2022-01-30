@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/modules/on_boarding/on_boarding_screen.dart';
 import 'package:shop_app/shared/bloc_provider.dart';
 import 'package:shop_app/shared/component/constants.dart';
@@ -7,7 +8,9 @@ import 'package:shop_app/shared/network/local/cach_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
 
+import 'layout/cubit/cubit.dart';
 import 'layout/shop_layout/shop_layout_Screen.dart';
+import 'modules/search/cubit/cubit.dart';
 import 'modules/shop_login/shop_login_screen.dart';
 
 void main() async{
@@ -32,10 +35,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      home: widget,
+      return BlocProvider(create: (BuildContext context) => ShopCubit()..getHomeData()..getCategoryData()..getFavoritesData()..getUserData(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        home: widget,
+      ),
     );
   }
 }
